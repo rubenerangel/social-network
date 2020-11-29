@@ -40,9 +40,9 @@ class CreateStatusTest extends TestCase
     public function an_authenticated_user_can_create_statuses()
     {
         // Para que laravel NO maneje las exepciones
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         
-        // 1. Given => Tenienedo
+        // 1. Given => Teniendo
         // Teniendo un usuario autenticado
         $user = User::factory()->make();
         
@@ -50,7 +50,7 @@ class CreateStatusTest extends TestCase
 
         // 2. When => Cuando
         // Cuando hace un post request a status
-        $response = $this->post(route('statuses.store'), [
+        $response = $this->postJson(route('statuses.store'), [
             'body' => 'Mi primer status'
         ]);
 
@@ -64,5 +64,58 @@ class CreateStatusTest extends TestCase
             'user_id' => $user->id,
             'body' => 'Mi primer status'
         ]);
+    }
+
+    /** @test */
+    public function a_status_requires_a_body()
+    {
+        // Para que laravel NO maneje las exepciones
+        // $this->withoutExceptionHandling();
+        
+        // 1. Given => Teniendo
+        // Teniendo un usuario autenticado
+        $user = User::factory()->make();
+        $this->actingAs($user);
+
+        // 2. When => Cuando
+        // Cuando hace un post request a status y el campo body esta vacio
+        $response = $this->postJson(route('statuses.store'), [
+            'body' => ''
+        ]);
+
+        // 3. Then => Entonces
+        // Entonces veo un mensaje de Error
+        $response->assertJsonStructure([
+            'message', 'errors' => ['body']
+        ]);
+        
+        $response->assertStatus(422);
+    }
+
+    /** @test */
+    public function a_status_body_requires_a_minimum_length()
+    {
+        // Para que laravel NO maneje las exepciones
+        // $this->withoutExceptionHandling();
+        
+        // 1. Given => Teniendo
+        // Teniendo un usuario autenticado
+        $user = User::factory()->make();
+        $this->actingAs($user);
+
+        // 2. When => Cuando
+        // Cuando hace un post request a status y el campo body esta vacio
+        $response = $this->postJson(route('statuses.store'), [
+            'body' => 'gtrf'
+        ]);
+
+        // 3. Then => Entonces
+        // Entonces veo un mensaje de Error
+        $response->assertStatus(422);
+        
+        $response->assertJsonStructure([
+            'message', 'errors' => ['body']
+        ]);
+        
     }
 }
