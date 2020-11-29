@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class StatusController extends Controller
 {
-
     public function store()
     {
         $status = Status::create([
@@ -18,4 +17,4 @@ class StatusController extends Controller
 
         return response()->json(['body' => $status->body]);
     }
-}
+} 

@@ -18,6 +18,11 @@ class CreateStatusTest extends TestCase
     /** @test */
     public function guests_users_can_not_create_statuses()
     {
+        // $this->withoutExceptionHandling();
+
+        // 1. Given => Tenienedo
+        // No Teniendo un usuario no puede crear status
+
         // Para que laravel NO maneje las exepciones
         // $this->withoutExceptionHandling();
         
@@ -27,8 +32,7 @@ class CreateStatusTest extends TestCase
             'body' => 'Mi primer status'
         ]);
 
-        dd($response->content());
-
+        //3. Then => Lo redirigimos al login
         $response->assertRedirect('login');
     }
 
@@ -61,7 +65,4 @@ class CreateStatusTest extends TestCase
             'body' => 'Mi primer status'
         ]);
     }
-
-    
-
 }
