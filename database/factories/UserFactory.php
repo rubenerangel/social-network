@@ -22,7 +22,9 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        static $incrementId = 1;
         return [
+            'id' => $incrementId++,
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
