@@ -5,8 +5,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StatusController;
 
-Auth::routes();
+Route::view('/', 'welcome');
 
 Route::post('statuses', [StatusController::class, 'store'])
   ->name('statuses.store')
-  ->middleware('auth');
+  ->middleware(['auth']);
+
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia\Inertia::render('Dashboard');
+})->name('dashboard');
