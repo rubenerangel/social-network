@@ -17,15 +17,14 @@ class UsersCanCreateStatusesTest extends DuskTestCase
      */
     public function users_can_create_statuses()
     {
-        $user = User::factory()->make();
+        $user = User::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/')
-                ->type('body', 'Mi primer status')
+                ->type('body', 'Login')
                 ->press('#create-status')
-                ->screenshot('Mi primer status')
-                ->assertSee('Mi primer status');
+                ->assertSee('Login');
         });
     }
 }
