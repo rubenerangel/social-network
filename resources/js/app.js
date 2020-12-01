@@ -19,9 +19,13 @@ Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue); */
-
 // const app = document.getElementById('app');
-Vue.component('status-form', require('./components/StatusForm.vue').default);
+
+/* Vue.component('status-form', require('./components/StatusForm.vue').default);
+Vue.component('statuses-list', require('./components/StatusesList.vue').default); */
+Vue.component('display-get-status', require('./components/DisplayGetStatus.vue').default);
+
+
 
 const app = new Vue({
     el: '#app'
