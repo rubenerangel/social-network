@@ -1,8 +1,15 @@
 require('./bootstrap');
+const URL_SOCIAL = process.env.MIX_APP_URL;
+
+window.axios.defaults.baseURL = `${URL_SOCIAL}`;
 
 require('moment');
 
-import Vue from 'vue';
+window.Vue = require('vue');
+
+window.EventBus = new Vue();
+
+// import Vue from 'vue';
 
 /* import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
@@ -14,6 +21,7 @@ Vue.use(InertiaForm);
 Vue.use(PortalVue); */
 
 // const app = document.getElementById('app');
+Vue.component('status-form', require('./components/StatusForm.vue').default);
 
 const app = new Vue({
     el: '#app'

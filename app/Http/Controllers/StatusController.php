@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class StatusController extends Controller
 {
+    public function index()
+    {
+        return Status::latest()->paginate();
+    }
+
     public function store()
     {
         request()->validate(['body' => 'required|min:5']);

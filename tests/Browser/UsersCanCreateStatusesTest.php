@@ -22,9 +22,10 @@ class UsersCanCreateStatusesTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                 ->visit('/')
-                ->type('body', 'Login')
+                ->type('body', 'Mi primer status')
                 ->press('#create-status')
-                ->assertSee('Login');
+                ->waitForText('Mi primer status')
+                ->assertSee('Mi primer status');
         });
     }
 }

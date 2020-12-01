@@ -7,6 +7,9 @@ use App\Http\Controllers\StatusController;
 
 Route::view('/', 'welcome');
 
+Route::get('statuses', [StatusController::class, 'index'])
+  ->name('statuses.index');
+
 Route::post('statuses', [StatusController::class, 'store'])
   ->name('statuses.store')
   ->middleware(['auth']);

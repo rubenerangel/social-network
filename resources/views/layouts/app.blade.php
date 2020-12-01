@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="csrf-token" content="{{csrf_token()}}">
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <title>SocialApp</title>
 </head>
 <body>
-  <div id="app">
+  <div>
     <nav class="navbar navbar-expand-lg navbar-light navbar-socialapp">
       <a class="navbar-brand" href="/">SocialApp</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +50,7 @@
       </div>
     </nav>
   
-    <main class="py-4">
+    <main id="app" class="py-4">
       @yield('content')
     </main>
   
