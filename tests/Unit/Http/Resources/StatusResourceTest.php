@@ -25,6 +25,7 @@ class StatusResourceTest extends TestCase
         $this->assertEquals($status->body, $statusResource['body']);
         $this->assertEquals($status->user->name, $statusResource['user_name']);
         $this->assertEquals('https://aprendible.com/images/default-avatar.jpg', $statusResource['user_avatar']);
-        $this->assertEquals($status->created_at->diffForHumans(), $statusResource['ago']);
+        // $this->assertEquals($status->created_at->diffForHumans(), $statusResource['created_at']);
+        $this->assertEquals($status->created_at, $statusResource['created_at']);
     }
 }

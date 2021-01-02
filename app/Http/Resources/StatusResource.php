@@ -18,7 +18,8 @@ class StatusResource extends JsonResource
             'body' => $this->resource->body,
             'user_name' => $this->resource->user->name, //se chequean las relaciones en la DB
             'user_avatar' => 'https://aprendible.com/images/default-avatar.jpg',
-            'ago' => $this->resource->created_at->diffForHumans(),
+            // 'ago' => $this->resource->created_at->diffForHumans(),
+            'created_at' => $this->resource->created_at,
         ];
     }
 }

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <form @submit.prevent="submit">
+    <form @submit.prevent="submit" v-if="isAuthenticated">
       <div class="card-body">
         <textarea
           name="body"
           class="form-control border-0 bg-light"
-          placeholder="Qué estas pensando Rubén?"
+          :placeholder="`Qué estas pensando ${currentUser.name}?`"
           v-model="body"
         ></textarea>
       </div>
@@ -13,6 +13,9 @@
         <button id="create-status" class="btn btn-primary">Publicar</button>
       </div>
     </form>
+    <div v-else class="card-body">
+      <a href="/login">Debes haer login</a>
+    </div>
     
   </div>
 </template>
@@ -27,17 +30,17 @@ export default {
   },
   methods: {
     submit() {
-      
       axios.post('/statuses', {body: this.body})
         .then(resp => {
-          EventBus.$emit('status-created', resp.data)
+          EventBus.$emit('status-created', resp.data.data)
           this.body = null;
         })
         .catch(error => {
-          console.log(error.response.data);
+          console.log(error.response.data.data);
         });
     }
   },
+  
 };
 </script>
 

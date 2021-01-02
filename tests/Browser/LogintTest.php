@@ -10,8 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class LogintTest extends DuskTestCase
 {
     use DatabaseMigrations;
-    /**
-     * A Dusk test example.
+    /** 
      * @test
      * @throws \Throwable
      */

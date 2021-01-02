@@ -10,11 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class CreateStatusTest extends TestCase
 {
     use RefreshDatabase;
-    /** 
-     * @test
-     * Anotación para presindir de el prefijo test
-     */
-
+    
     /** @test */
     public function guests_users_can_not_create_statuses()
     {
@@ -36,6 +32,7 @@ class CreateStatusTest extends TestCase
         $response->assertRedirect('login');
     }
 
+    /** @test */  
     // public function un_usuario_puede_crear_estados()
     public function an_authenticated_user_can_create_statuses()
     {
@@ -44,7 +41,7 @@ class CreateStatusTest extends TestCase
         
         // 1. Given => Teniendo
         // Teniendo un usuario autenticado
-        $user = User::factory()->make();
+        $user = User::factory()->create();
         
         $this->actingAs($user);
 
@@ -55,7 +52,7 @@ class CreateStatusTest extends TestCase
         ]);
 
         $response->assertJson([
-            'body' => 'Mi primer status'
+            'data' => ['body' => 'Mi primer status'],
         ]);
         
         // 3. Then => Entonces
@@ -74,7 +71,7 @@ class CreateStatusTest extends TestCase
         
         // 1. Given => Teniendo
         // Teniendo un usuario autenticado
-        $user = User::factory()->make();
+        $user = User::factory()->create();
         $this->actingAs($user);
 
         // 2. When => Cuando
@@ -100,7 +97,7 @@ class CreateStatusTest extends TestCase
         
         // 1. Given => Teniendo
         // Teniendo un usuario autenticado
-        $user = User::factory()->make();
+        $user = User::factory()->create();
         $this->actingAs($user);
 
         // 2. When => Cuando
@@ -116,6 +113,5 @@ class CreateStatusTest extends TestCase
         $response->assertJsonStructure([
             'message', 'errors' => ['body']
         ]);
-        
     }
 }

@@ -25,7 +25,9 @@ Vue.use(PortalVue); */
 Vue.component('statuses-list', require('./components/StatusesList.vue').default); */
 Vue.component('display-get-status', require('./components/DisplayGetStatus.vue').default);
 
+import auth from './Mixins/auth';
 
+Vue.mixin(auth);
 
 const app = new Vue({
     el: '#app'
