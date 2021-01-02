@@ -16,7 +16,7 @@ Route::post('statuses', [StatusController::class, 'store'])
   ->middleware(['auth']);
 
 // Statuses Likes routes
-Route::post('statuses/{status}/likes', [StatusLikesController::class, 'store'])->name('statuses.like.store')->middleware('auth');
+Route::post('statuses/{status}/likes', [StatusLikesController::class, 'store'])->name('statuses.likes.store')->middleware('auth');
 
 /* Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
