@@ -7,10 +7,18 @@ use Illuminate\Http\Request;
 
 class StatusLikesController extends Controller
 {
-    /** @test */
     public function store(Status $status)
     {
         $status->like();
+
+        // $status->likes()->create([
+        //     'user_id' => auth()->id()
+        // ]);
+    }
+
+    public function destroy(Status $status)
+    {
+        $status->unlike();
 
         // $status->likes()->create([
         //     'user_id' => auth()->id()
