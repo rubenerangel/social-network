@@ -12,6 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class StatusTest extends TestCase
 {
     use RefreshDatabase;
+
     /** @test */
     public function a_status_belongs_to_a_user()
     {
@@ -80,5 +81,19 @@ class StatusTest extends TestCase
         $status->like();
 
         $this->assertTrue($status->isLiked());
+    }
+
+    /** @test */
+    public function a_status_knows_how_many_likes_it_has()
+    {
+        $status = Status::factory()->create();
+
+        $this->assertEquals(0, $status->likesCount());
+        
+        Like::factory()->times(2)->create([
+            'status_id' => $status->id
+        ]);
+
+        $this->assertEquals(2, $status->likesCount());
     }
 }

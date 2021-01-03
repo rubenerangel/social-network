@@ -21,7 +21,7 @@
         <p v-text="status.body" class="card-text text-secondary"></p>
         
       </div>
-      <div class="card-footer p-2">
+      <div class="card-footer p-2 d-flex justify-content-between align-items-center">
         <button
           v-if="status.is_liked"
           dusk="unlike-btn"
@@ -40,6 +40,10 @@
           <i class="far fa-thumbs-up text-primary mr-1"></i>
           ME GUSTA
         </button>
+        <div class="mr-2 text-secondary">
+          <i class="far fa-thumbs-up"></i>
+          <span dusk="likes-count">{{ status.likes_count }}</span> 
+        </div>
       </div>
     </div>
   </div>
@@ -71,11 +75,13 @@ export default {
     like(status) {
       axios.post(`/statuses/${status.id}/likes`).then((resp) => {
         status.is_liked = true;
+        status.likes_count++;
       });
     },
     unlike(status) {
       axios.delete(`/statuses/${status.id}/likes`).then((resp) => {
         status.is_liked = false;
+        status.likes_count--;
       });
     },
   },
