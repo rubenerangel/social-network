@@ -33,4 +33,21 @@ class UsersCanLikeStatusesTest extends DuskTestCase
                 ->assertSee('ME GUSTA');
         });
     }
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function guest_users_cannot_like_statuses()
+    {
+        $status = Status::factory()->create();
+
+        $this->browse(function (Browser $browser) use ($status) {
+            $browser
+                ->visit('/')
+                ->waitForText($status->body)
+                ->press('@like-btn')
+                ->assertPathIs('/login');
+        });
+    }
 }

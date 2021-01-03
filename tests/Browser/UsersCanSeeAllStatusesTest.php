@@ -17,7 +17,7 @@ class UsersCanSeeAllStatusesTest extends DuskTestCase
      */
     public function users_can_see_all_statuses_on_the_homepage()
     {
-        $statuses = Status::factory()->times(3)->create();
+        $statuses = Status::factory()->times(3)->create(['created_at' => now()->subMinute()]);
 
         $this->browse(function (Browser $browser) use($statuses) {
             $browser->visit('/')

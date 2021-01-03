@@ -1,5 +1,5 @@
  <template>
-  <div>
+  <div @click="redirectIfGuest()">
     <div
       v-for="(status, index) in statuses"
       :key="index"
