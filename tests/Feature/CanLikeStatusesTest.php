@@ -27,10 +27,11 @@ class CanLikeStatusesTest extends TestCase
         // Cuando hace un post request a like
         $status = Status::factory()->create();
 
-        $response = $this->post(route('statuses.likes.store', $status));
+        $response = $this->postJson(route('statuses.likes.store', $status));
 
         //3. Then => Lo redirigimos al login
-        $response->assertRedirect('login');
+        // $response->assertRedirect('login');
+        $response->assertStatus(401);
     }
 
     /** @test*/

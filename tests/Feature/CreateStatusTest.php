@@ -24,12 +24,12 @@ class CreateStatusTest extends TestCase
         
         // 2. When => Cuando
         // Cuando hace un post request a status
-        $response = $this->post(route('statuses.store'), [
+        $response = $this->postJson(route('statuses.store'), [
             'body' => 'Mi primer status'
         ]);
 
         //3. Then => Lo redirigimos al login
-        $response->assertRedirect('login');
+        $response->assertStatus(401);
     }
 
     /** @test */  
