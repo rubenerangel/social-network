@@ -2,10 +2,12 @@
 
 namespace Tests\Unit\Http\Resources;
 
+use App\Http\Resources\CommentResource;
 use Tests\TestCase;
 use App\Models\Status;
 use Database\factories\StatusFactory;
 use App\Http\Resources\StatusResource;
+use App\Models\Comment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StatusResourceTest extends TestCase
@@ -18,6 +20,7 @@ class StatusResourceTest extends TestCase
         $this->withoutExceptionHandling();
 
         $status = Status::factory()->create();
+        Comment::factory()->create(['status_id' => $status->id]);
 
         /* Transforma el estado y lo devuelve como queremos */
         $statusResource = StatusResource::make($status)->resolve();
@@ -53,6 +56,16 @@ class StatusResourceTest extends TestCase
         $this->assertEquals(
             0,
             $statusResource['likes_count']
+        );
+// dd($statusResource['comments']->collection->first()->resource);
+        $this->assertEquals(
+           CommentResource::class,
+            $statusResource['comments']->collects
+        );
+
+        $this->assertInstanceOf(
+            Comment::class,
+            $statusResource['comments']->first()->resource
         );
     }
 }

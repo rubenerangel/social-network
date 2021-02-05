@@ -19,7 +19,7 @@
       </div>
     </form>
     <div v-else class="card-body">
-      <a href="/login">Debes haer login</a>
+      <a href="/login">Debes hacer login</a>
     </div>
     
   </div>

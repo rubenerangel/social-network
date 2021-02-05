@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Models\Comment;
 use App\Models\User;
 use App\Models\Status;
 use Tests\DuskTestCase;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class UsersCanLikeStatusesTest extends DuskTestCase
 {
     use DatabaseMigrations;
+
     /**
      * @test
      * @throws \Throwable

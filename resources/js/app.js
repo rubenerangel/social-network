@@ -32,3 +32,5 @@ Vue.mixin(auth);
 const app = new Vue({
     el: '#app'
 });
+
+Vue.config.devtools = true;
