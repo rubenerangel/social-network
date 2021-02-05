@@ -48,6 +48,7 @@
                 v-model="newComment" 
                 name="comment" 
                 rows="1" 
+                required
                 placeholder="Escribe un comentario..."
                 class="form-control border-0 shadow-sm"
               ></textarea>
@@ -91,6 +92,9 @@ export default {
           this.newComment = null;
           this.comments.push(resp.data.data)
         })
+        .catch(error => {
+          console.log(error.response.data);
+        });
     }
   },
 }

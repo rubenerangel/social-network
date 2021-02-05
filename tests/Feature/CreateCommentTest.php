@@ -44,4 +44,32 @@ class CreateCommentTest extends TestCase
             'body' => $comment['body'],
         ]);
     }
+
+    /** @test */
+    public function a_comment_requires_a_body()
+    {
+        // Para que laravel NO maneje las exepciones
+        // $this->withoutExceptionHandling();
+        
+        // 1. Given => Teniendo
+        // Teniendo un usuario autenticado
+        $status = Status::factory()->create();
+        $user = User::factory()->create();
+        $this->actingAs($user); // Cuado hacemos login
+
+        // 2. When => Cuando
+        // Cuando hace un post request a status y el campo body esta vacio
+        $response = $this->postJson(route('statuses.comments.store', $status), [
+            'body' => ''
+        ]);
+
+        $response->assertStatus(422);
+
+        // 3. Then => Entonces
+        // Entonces veo un mensaje de Error
+        $response->assertJsonStructure([
+            'message', 'errors' => ['body']
+        ]);
+        
+    }
 }

@@ -3,10 +3,11 @@
     <form @submit.prevent="submit" v-if="isAuthenticated">
       <div class="card-body">
         <textarea
+          v-model="body"
+          required
           name="body"
           class="form-control border-0 bg-light"
           :placeholder="`Qué estas pensando ${currentUser.name}?`"
-          v-model="body"
         ></textarea>
       </div>
       <div class="card-footer">
@@ -41,7 +42,7 @@ export default {
           this.body = null;
         })
         .catch(error => {
-          console.log(error.response.data.data);
+          console.log(error.response.data);
         });
     }
   },
