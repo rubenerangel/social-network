@@ -23,9 +23,13 @@ Route::delete('statuses/{status}/likes', [StatusLikesController::class, 'destroy
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard'); */
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Statuses Comments routes
 Route::post('statuses/{status}/comments', [App\Http\Controllers\StatusCommentController::class, 'store'])->name('statuses.comments.store')->middleware('auth') ;
+
+// Comments Likes routes
+Route::post('comments/{comment}/likes', [App\Http\Controllers\CommentLikesController::class, 'store'])->name('comments.likes.store')->middleware('auth');
+
+Auth::routes();
