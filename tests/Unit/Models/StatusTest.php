@@ -37,15 +37,20 @@ class StatusTest extends TestCase
     }
 
     /** @test */
-    public function a_status_has_many_likes()
+    public function a_status_morph_many_likes()
     {
         $this->withoutExceptionHandling();
 
         $status = Status::factory()->create();
 
         Like::factory()->create([
-            'status_id' => $status->id
+            'likeable_id' => $status->id,          // 1
+            'likeable_type' => get_class($status), //App\\Models\\Status
         ]);
+
+        /* Like::factory()->create([
+            'status_id' => $status->id
+        ]); */
 
         $this->assertInstanceOf(Like::class, $status->likes->first() );
     }
@@ -105,8 +110,13 @@ class StatusTest extends TestCase
 
         $this->assertEquals(0, $status->likesCount());
         
-        Like::factory()->times(2)->create([
+        /* Like::factory()->times(2)->create([
             'status_id' => $status->id
+        ]); */
+
+        Like::factory()->times(2)->create([
+            'likeable_id' => $status->id,          // 1
+            'likeable_type' => get_class($status), //App\\Models\\Status
         ]);
 
         $this->assertEquals(2, $status->likesCount());
