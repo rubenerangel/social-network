@@ -18,7 +18,8 @@ class StatusResource extends JsonResource
             'id' => $this->resource->id,
             'body' => $this->resource->body,
             'user_name' => $this->resource->user->name, //se chequean las relaciones en la DB
-            'user_avatar' => 'https://aprendible.com/images/default-avatar.jpg',
+            'user_link' => $this->user->link(),
+            'user_avatar' => $this->user->avatar(),
             // 'ago' => $this->resource->created_at->diffForHumans(),
             'created_at' => $this->resource->created_at,
             'is_liked' => $this->isLiked(),

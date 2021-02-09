@@ -34,4 +34,7 @@ Route::post('comments/{comment}/likes', [App\Http\Controllers\CommentLikesContro
 
 Route::delete('comments/{comment}/likes', [App\Http\Controllers\CommentLikesController::class, 'destroy'])->name('comments.likes.destroy')->middleware('auth');
 
+// Users routes
+Route::get('@{user}', [App\Http\Controllers\UsersController::class, 'show'])->name('users.show');
+
 Auth::routes();

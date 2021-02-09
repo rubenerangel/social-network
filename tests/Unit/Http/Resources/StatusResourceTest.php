@@ -5,7 +5,6 @@ namespace Tests\Unit\Http\Resources;
 use App\Http\Resources\CommentResource;
 use Tests\TestCase;
 use App\Models\Status;
-use Database\factories\StatusFactory;
 use App\Http\Resources\StatusResource;
 use App\Models\Comment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -34,15 +33,22 @@ class StatusResourceTest extends TestCase
             $status->body, 
             $statusResource['body']
         );
+
+        $this->assertEquals(
+            $status->user->link(), 
+            $statusResource['user_link']
+        );
+
         $this->assertEquals(
             $status->user->name, 
             $statusResource['user_name']
         );
+
         $this->assertEquals(
-            'https://aprendible.com/images/default-avatar.jpg', 
+            $status->user->avatar(), 
             $statusResource['user_avatar']
         );
-        // $this->assertEquals($status->created_at->diffForHumans(), $statusResource['created_at']);
+
         $this->assertEquals(
             $status->created_at, 
             $statusResource['created_at']
@@ -57,7 +63,7 @@ class StatusResourceTest extends TestCase
             0,
             $statusResource['likes_count']
         );
-// dd($statusResource['comments']->collection->first()->resource);
+
         $this->assertEquals(
            CommentResource::class,
             $statusResource['comments']->collects
