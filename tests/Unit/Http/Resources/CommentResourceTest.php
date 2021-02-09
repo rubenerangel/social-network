@@ -24,6 +24,11 @@ class CommentResourceTest extends TestCase
         $CommentResource = CommentResource::make($comment)->resolve();
 
         $this->assertEquals(
+            $comment->id, 
+            $CommentResource['id']
+        );
+
+        $this->assertEquals(
             $comment->body, 
             $CommentResource['body']
         );
@@ -36,6 +41,16 @@ class CommentResourceTest extends TestCase
         $this->assertEquals(
             'https://aprendible.com/images/default-avatar.jpg', 
             $CommentResource['user_avatar']
+        );
+
+        $this->assertEquals(
+            0, 
+            $CommentResource['likes_count']
+        );
+
+        $this->assertEquals(
+            false, 
+            $CommentResource['is_liked']
         );
     }
 }
