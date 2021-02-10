@@ -2,21 +2,45 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class RegistationTest extends TestCase
 {
+    use RefreshDatabase;
     /**
-     * A basic feature test example.
-     *
-     * @return void
+     * @test
      */
-    public function testExample()
+    public function users_can_register()
     {
-        $response = $this->get('/');
+        // $this->withoutExceptionHandling();
 
-        $response->assertStatus(200);
+        $userData = [
+            'name'          => 'RubenRangel',
+            'first_name'    => 'Ruben',
+            'last_name'     => 'Rangel',
+            'email'         => 'rubenrang@gmail.com',
+            'password'      => 'password',
+            'password_confirmation' => 'password',
+        ];
+
+        $resp = $this->post(route('register'), $userData);
+
+        $resp->assertRedirect('/');
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'RubenRangel',
+            'first_name' => 'Ruben',
+            'last_name' => 'Rangel',
+            'email' => 'rubenrang@gmail.com',
+        ]);
+
+        $this->assertTrue(
+            Hash::check('password', User::first()->password),
+            'The password needs to be hashed'
+        );
     }
 }
