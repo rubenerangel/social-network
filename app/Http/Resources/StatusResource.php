@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StatusResource extends JsonResource
@@ -17,9 +18,10 @@ class StatusResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'body' => $this->resource->body,
-            'user_name' => $this->resource->user->name, //se chequean las relaciones en la DB
+            'user' => UserResource::make($this->user),
+            /* 'user_name' => $this->resource->user->name, //se chequean las relaciones en la DB
             'user_link' => $this->user->link(),
-            'user_avatar' => $this->user->avatar(),
+            'user_avatar' => $this->user->avatar(), */
             // 'ago' => $this->resource->created_at->diffForHumans(),
             'created_at' => $this->resource->created_at,
             'is_liked' => $this->isLiked(),
