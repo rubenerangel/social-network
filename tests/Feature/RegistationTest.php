@@ -15,9 +15,9 @@ class RegistationTest extends TestCase
     /** @test*/
     public function users_can_register()
     {
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
-        $userData = $this->userValidData();
+        $this->get(route('register'))->assertSuccessful();
 
         $resp = $this->post(route('register'), $this->userValidData());
 
