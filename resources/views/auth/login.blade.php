@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                @include('partials.validation-errors')
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
@@ -15,7 +16,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="abc@xyz.com">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email" autofocus placeholder="abc@xyz.com">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +30,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="current-password" placeholder="password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -52,7 +53,7 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary" id="login-btn">
+                                <button type="submit" class="btn btn-primary" dusk="login-btn">
                                     {{ __('Login') }}
                                 </button>
 
