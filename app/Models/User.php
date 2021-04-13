@@ -53,6 +53,7 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'avatar'
     ];
 
     public function getRouteKeyName()
@@ -68,5 +69,9 @@ class User extends Authenticatable
     public function avatar()
     {
         return 'https://aprendible.com/images/default-avatar.jpg';
+    }
+
+    public function getAvatarAttribute() {
+        return $this->avatar();
     }
 }
