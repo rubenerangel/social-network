@@ -17,6 +17,9 @@ export default {
   components: {
     StatusListItem,
   },
+  props: {
+    url: String
+  },
   data() {
     return {
       statuses: [],
@@ -24,7 +27,7 @@ export default {
   },
   mounted() {
     axios
-      .get("/statuses")
+      .get(this.getUrl)
       .then((resp) => {
         this.statuses = resp.data.data;
       })
@@ -36,6 +39,11 @@ export default {
       this.statuses.unshift(status);
     });
   },
+  computed: {
+    getUrl() {
+      return this.url ? this.url : '/statuses'
+    }
+  }
 };
 </script>
  

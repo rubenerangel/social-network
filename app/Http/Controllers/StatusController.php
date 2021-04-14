@@ -16,7 +16,7 @@ class StatusController extends Controller
         );
     }
 
-    public function store()
+    public function store(Request $request)
     {
         request()->validate(['body' => 'required|min:5']);
 

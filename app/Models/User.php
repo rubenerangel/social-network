@@ -74,4 +74,14 @@ class User extends Authenticatable
     public function getAvatarAttribute() {
         return $this->avatar();
     }
+
+    public function latest($column = 'created_at')
+    {
+        return $this->orderBy($column, 'desc');
+    }
+
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
 }

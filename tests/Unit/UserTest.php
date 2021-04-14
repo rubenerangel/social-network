@@ -2,11 +2,15 @@
 
 namespace Tests\Unit;
 
-use App\Models\User;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\Status;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
+    use RefreshDatabase;
+    
     /** @test*/
     public function route_key_name_is_set_to_name()
     {
@@ -30,5 +34,15 @@ class UserTest extends TestCase
 
         $this->assertEquals('https://aprendible.com/images/default-avatar.jpg', $user->avatar());
         $this->assertEquals('https://aprendible.com/images/default-avatar.jpg', $user->avatar);
+    }
+
+    /**  @test */
+    public function a_user_has_many_statuses()
+    {
+        $user = User::factory()->create();
+
+        Status::factory()->create(['user_id' => $user->id]);
+
+        $this->assertInstanceOf( Status::class, $user->statuses->first() );
     }
 }

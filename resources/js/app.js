@@ -1,7 +1,13 @@
 require('./bootstrap');
+/* De esta manera logramos una capa de seguridad sobre el servidor en el que 
+*  se encuentre.
+*/
 const URL_SOCIAL = process.env.MIX_APP_URL;
 
-window.axios.defaults.baseURL = `${URL_SOCIAL}`;
+window.axios.defaults.baseURL = `${URL_SOCIAL}`; 
+/* *
+* end
+** */
 
 require('moment');
 
@@ -21,8 +27,8 @@ Vue.use(InertiaForm);
 Vue.use(PortalVue); */
 // const app = document.getElementById('app');
 
-/* Vue.component('status-form', require('./components/StatusForm.vue').default);
-Vue.component('statuses-list', require('./components/StatusesList.vue').default); */
+/* Vue.component('status-form', require('./components/StatusForm.vue').default);*/
+Vue.component('status-list', require('./components/StatusList.vue').default);  
 Vue.component('display-get-status', require('./components/DisplayGetStatus.vue').default);
 
 import auth from './Mixins/auth';

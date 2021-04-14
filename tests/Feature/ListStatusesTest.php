@@ -2,15 +2,17 @@
 
 namespace Tests\Feature;
 
-use App\Models\Status;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Database\factories\StatusFactory;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\Status;
+use Database\factories\StatusFactory;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ListStatusesTest extends TestCase
 {
     use RefreshDatabase;
+
     /** @test */
     public function can_get_all_statuses()
     {
@@ -37,6 +39,32 @@ class ListStatusesTest extends TestCase
         $this->assertEquals(
             $statuses4->body,
             $response->json('data.0.body'),
+        );
+    }
+
+    /** @test */
+    public function can_get_statuses_for_a_specific_user()
+    {
+        $user = User::factory()->create();
+        $status1 = Status::factory()->create(['user_id' => $user->id, 'created_at' => now()->subDay()]);
+        $status2 = Status::factory()->create(['user_id' => $user->id]);
+
+        $otherStatuses = Status::factory()->times(2)->create();
+
+        $response = $this->actingAs($user)
+            ->getJson(route('users.statuses.index', $user));
+
+        $response->assertJson([
+            'meta' => ['total' => 2]
+        ]);
+
+        $response->assertJsonStructure([
+            'data', 'links' => ['prev', 'next']
+        ]);
+
+        $this->assertEquals(
+            $status2->body,
+            $response->json('data.0.body')
         );
     }
 }
