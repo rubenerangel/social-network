@@ -30,6 +30,7 @@ Vue.use(PortalVue); */
 /* Vue.component('status-form', require('./components/StatusForm.vue').default);*/
 Vue.component('status-list', require('./components/StatusList.vue').default);  
 Vue.component('display-get-status', require('./components/DisplayGetStatus.vue').default);
+Vue.component('friendship-btn', require('./components/FriendshipBtn.vue').default);
 
 import auth from './Mixins/auth';
 

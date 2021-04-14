@@ -11,6 +11,10 @@
 
               {{ $user->name }}
             </h5>
+            <friendship-btn 
+              class="btn btn-primary btn-block"
+              :recipient="{{ $user }}">
+            </friendship-btn>
           </div>
 
         </div>
