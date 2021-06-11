@@ -15,29 +15,41 @@
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Username:</label>
-                            <input name="name" class="form-control boorder-0" type="text" placeholder="Tu nombre de usuario...">
+                            <div class="col-md-6">
+                                <input name="name" class="form-control boorder-0" type="text" placeholder="Tu nombre de usuario..." value="{{ old('name') }}">
+                            </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Nombre:</label>
-                            <input name="first_name" class="form-control boorder-0" type="text" placeholder="Tu primer nombre...">
+                            <div class="col-md-6">
+                                <input name="first_name" class="form-control boorder-0" type="text" placeholder="Tu primer nombre..." value="{{ old('first_name') }}">
+                            </div>
                         </div>
 
                         <div class="form-group row">
+                            
                             <label for="last_name" class="col-md-4 col-form-label text-md-right">Apellido:</label>
-                            <input name="last_name" class="form-control boorder-0" type="text" placeholder="Tu apellido...">
+
+                            <div class="col-md-6">
+                                <input name="last_name" class="form-control boorder-0" type="text" placeholder="Tu apellido..." value="{{ old('last_name') }}">
+                            </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
 
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
+                            <div class="col-md-6">
 
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="form-group row">
