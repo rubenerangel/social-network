@@ -68,7 +68,8 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        return 'https://aprendible.com/images/default-avatar.jpg';
+        // return 'https://aprendible.com/images/default-avatar.jpg';
+        return '/images/avatar.png';
     }
 
     public function getAvatarAttribute() {
