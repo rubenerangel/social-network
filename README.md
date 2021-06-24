@@ -1,6 +1,6 @@
 # Red Social desde 0 con TDD
 
-Miralo en funcionamiento [http://social.rubenrangel.org/register] (http://social.rubenrangel.org/register)
+Miralo en funcionamiento http://social.rubenrangel.org 
 
 Red Social desde 0 utilizando **Laravel 8.0.X** - **VueJS** - **Bootstrap 4** y **TDD** Desarrollo Guiado por Pruebas.
 
